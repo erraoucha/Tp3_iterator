@@ -1,56 +1,35 @@
 package com.erraoucha;
 
-import java.time.LocalDate;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+import java.util.Objects;
+
+@Data // Génère automatiquement les getters, setters, equals, hashCode, et toString
+@AllArgsConstructor // Génère un constructeur avec tous les champs
+@NoArgsConstructor // Génère un constructeur sans arguments
 public class Person {
-    
-    private String firstname;
-    private String lastname;
-    private LocalDate birthdate;
-    
+    private int id;
+    private String name;
 
-    public Person(String firstname, String lastname, LocalDate birthdate) {
-        this.firstname = firstname;
-        this.lastname = lastname;
-        this.birthdate = birthdate;
-    }
-    public Person (){
-
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null || getClass() != obj.getClass())
+            return false;
+        Person person = (Person) obj;
+        return id == person.id; // Comparaison basée uniquement sur l'attribut `id`
     }
 
-    public String getFirstname() {
-        return firstname;
+    @Override
+    public int hashCode() {
+        return Objects.hash(id); // Génération d'un hashCode basé sur `id`
     }
 
-    public String getLastname() {
-        return lastname;
+    @Override
+    public String toString() {
+        return "Person{id=" + id + ", name='" + name + "'}";
     }
-
-    public LocalDate getBirthdate() {
-        return birthdate;
-    }
-
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
-    }
- 
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
-    }
-
-   
-
-    
-    public void setBirthdate(LocalDate birthdate) {
-        this.birthdate = birthdate;
-    }
-    
-    
-
-
-    public int calculateAge(){
-        return LocalDate.now().getYear()-birthdate.getYear();
-    }
-    
-
 }
