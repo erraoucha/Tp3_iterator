@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.assertj.core.api.Assertions.*;
 import java.time.LocalDate;
+import java.util.*;
 
 import org.junit.Test;
 
@@ -20,12 +21,27 @@ public class TestPersonWithoutIterator {
  people . add (new Person (2 , "Bob ") ) ;
  people . add (new Person (3 , " Charlie ") ) ;
 
-// Suppression sans iterator ( provoque ConcurrentModificationException )
+// // Suppression sans iterator ( provoque ConcurrentModificationException )
 
- for ( Person person : people ) {
-if ( person . getName () . equals ("Bob") ) {
- people . remove ( person ) ; // Erreur ici
- }
- }
- } 
+ /*  for ( Person person : people ) {
+  if ( person . getName () . equals ("Bob") ) {
+   people . remove ( person ) ; // Erreur ici
+   }
+  }
 }
+} */
+  // Suppression avec iterator (sé curis é)
+  Iterator < Person > iterator = people . iterator () ;
+  while ( iterator . hasNext () ) {
+  Person person = iterator . next () ;
+  if ( person . getName () . equals ("Bob") ) {
+  iterator . remove () ; // Suppression sé curis ée
+  }
+  }
+ 
+  System . out . println ("Set apr ès suppression de ’Bob ’ : "+people);
+  
+}
+}
+ 
+  
