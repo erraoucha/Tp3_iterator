@@ -7,7 +7,7 @@ import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.*;
 
-public class PersonTest {
+public class PersonDeleteTest {
 
     @Test
     public void testPersonClass() {
